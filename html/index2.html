@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <input type="text" placeholder="Nội dung" id="getvalue">
+        <button onclick="Add()">Nhập</button>
+        
+    </div>
+    <div>
+        <ul>
+            <li id="results"></li>
+        </ul>
+    </div>
+
+    <script>
+
+        function Add() {
+            var xArray = document.getElementById("getvalue").value
+            var span = document.createElement('span')
+            span.append(xArray)
+            var deletex = document.createElement('button')
+            deletex.append('xóa')
+            var li = document.createElement('li')
+            li.append(span)
+            li.append(deletex)
+            var ul = document.getElementById("result")
+            ul.append(li)
+            deletex.addEventListener('click', function(){
+                var locationli = this.parentElement
+                locationli.remove()
+            })
+            var edit = document.createElement('button')
+            edit.append('Chỉnh Sửa')
+            li.append(edit)
+            edit.addEventListener('click', function(){
+                var newinput = document.createElement('input')
+                var save = document.createElement('button')
+                save.append('Lưu')
+                li.append(newinput)
+                li.append(save)
+                edit.style.display = 'none'
+
+                var pa = this.parentElement
+                var elementa = pa.getElementsByTagName("span")[0]
+                var text = elementa.textContent
+                newinput.value = text
+                
+
+                newinput.setAttribute('id','new')
+                save.addEventListener('click', function(){
+                    var saveli = document.getElementById("new").value
+                    var getvalue = this.parentElement
+                    var pa = getvalue.getElementsByTagName("span")[0]
+                    pa.innerHTML=saveli
+                    newinput.remove()
+                    save.remove()
+                    edit.style.display = 'block'
+
+                })
+               
+                
+            })
+        }
+
+
+    </script>
+</body>
+
+</html>

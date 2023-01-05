@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/style4.css">
+</head>
+
+<body>
+    <div>
+        <div class="music">
+            <div class="header">
+                <h4>Now Playing</h4>
+                <h1>String 57Th & 9Th</h1>
+            </div>
+            <div class="cicre">
+                <div><img src="../image/binz.jpg" alt=""></div>
+            </div>
+            <div class="icon-music">
+                <div class="btn-repeat">
+                    <i class="fa-sharp fa-solid fa-repeat"></i>
+                </div>
+                <div>
+                    <i class="fa-solid fa-backward-fast"></i>
+                </div>
+                <div class="toggle-playy">
+                    <i class="fa-sharp fa-solid fa-circle-pause"></i>
+                    <i class="fa-solid fa-circle-play"></i>
+                </div>
+                <div>
+                    <i class="fa-solid fa-forward-fast"></i>
+                </div>
+                <div class="btn-random">
+                    <i class="fa-solid fa-shuffle"></i>
+                </div>
+            </div>
+            <input class="progress" type="range" value="0" min="0" step="1" max="100">
+            <audio src=""></audio>
+        </div>
+        <div class="music-one">
+
+        </div>
+    </div>
+    <script>
+        var musicone = document.querySelector('.music-one')
+
+        const cdmusic = document.querySelector('.cicre')
+
+        const heading = document.querySelector('.header h1')
+        const imgagecicre = document.querySelector('.cicre div img')
+        const musichot = document.querySelector('.music audio')
+       
+        
+
+        const toggleplay = document.querySelector('.toggle-playy')
+        const player = document.querySelector('.music')
+        
+        
+        const progress = document.querySelector('.progress')//get ra giá trị thẻ input tua
+
+        const prevlist = document.querySelector('.fa-backward-fast') //get ra nút lùi bài
+        const nexplist = document.querySelector('.fa-forward-fast') // get ra nút tiến
+        
+        const randoms = document.querySelector('.btn-random')
+        
+        const repeats = document.querySelector('.btn-repeat')
+       
+        const playList = document.querySelector('.music-one')
+
+
+        const app = {
+            isPlaying: false, //kích hoạt âm thanh
+            currentindex:0,  //chỉ mục đầu tiên
+            isRandom : false, //kích hoạt nút random
+            isrePeat : false, // kích hoạt nút lặp lại
+            songs:[
+                {
+                    name:'BlackJack',
+                    single:'Binz&SooBin',
+                    path:'../musics/song1.mp3',
+                    image:'../image/binz.jpg',
+                },
+                {
+                    name:'Waiting for you',
+                    single:'Mono',
+                    path:'../musics/song2.mp3',
+                    image:'../image/mono.jpg'
+                },
+                {
+                    name:'Vì mẹ anh bắt chia tay',
+                    single:'Miu Lê & Karik',
+                    path:'../musics/song3.mp3',
+                    image:'../image/miule&karik.jpg'
+                },
+                {
+                    name:'Âm thầm bên em',
+                    single:'Sơn Tùng',
+                    path:'../musics/song4.mp3',
+                    image:'../image/Sơntung.jpg'
+                },
+                {
+                    name:'Hãy trao cho anh',
+                    single:'Sơn Tùng mtp',
+                    path:'../musics/song5.mp3',
+                    image:'../image/sontung&snoopdog.jpg'
+                },
+                {
+                    name:'Gỉa vờ nhưng em yêu anh',
+                    single:'Miu Lê',
+                    path:'../musics/song6.mp3',
+                    image:'../image/miule.jpg'
+                },
+                {
+                    name:'Imma Heartbreaker',
+                    single:'LK x JustaTee x Emily',
+                    path:'../musics/song7.mp3',
+                    image:'../image/justerty.jpg'
+                },
+                {
+                    name:'BlackJack',
+                    single:'Binz&SooBin',
+                    path:'../musics/song1.mp3',
+                    image:'../image/binz.jpg',
+                },
+                {
+                    name:'Waiting for you',
+                    single:'Mono',
+                    path:'../musics/song2.mp3',
+                    image:'../image/mono.jpg'
+                },
+                {
+                    name:'Vì mẹ anh bắt chia tay',
+                    single:'Miu Lê & Karik',
+                    path:'../musics/song3.mp3',
+                    image:'../image/miule&karik.jpg'
+                },
+                {
+                    name:'Âm thầm bên em',
+                    single:'Sơn Tùng',
+                    path:'../musics/song4.mp3',
+                    image:'../image/Sơntung.jpg'
+                },
+                {
+                    name:'Hãy trao cho anh',
+                    single:'Sơn Tùng mtp',
+                    path:'../musics/song5.mp3',
+                    image:'../image/sontung&snoopdog.jpg'
+                },
+                {
+                    name:'Gỉa vờ nhưng em yêu anh',
+                    single:'Miu Lê',
+                    path:'../musics/song6.mp3',
+                    image:'../image/miule.jpg'
+                },
+                {
+                    name:'Imma Heartbreaker',
+                    single:'LK x JustaTee x Emily',
+                    path:'../musics/song7.mp3',
+                    image:'../image/justerty.jpg'
+                },
+                
+            ],
+            
+            render:function() {
+                var html = this.songs.map((song,index) => {
+                    return`<div class="music-one1 ${index === this.currentindex ? 'active' : ''}" data-index="${index}"> 
+                                <div class="mucsicfile1">
+                                    <img src="${song.image}" alt="">
+                                </div>
+                                <div class="mucsicfile2">
+                                    <h3>${song.name}</h3>
+                                    <p>${song.single}</p>
+                                </div>
+                                <div class="mucsicfile3">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </div>
+                            </div>`
+                        })
+                musicone.innerHTML = html
+            },
+
+            
+
+            // Tạo ra object mới trong object mới mang tên currentsong trong songs chứa phần tử đầu
+            defineProperties : function() {
+                Object.defineProperty(app,'currentsong',{
+                    get: function() {
+                        return this.songs[this.currentindex] 
+                    }
+
+                })
+            },
+
+            
+
+            //Load ra bài đầu tiên
+            loadcurentsong : function() {
+                heading.textContent = this.currentsong.name
+                imgagecicre.src = this.currentsong.image
+                musichot.src = this.currentsong.path
+                
+            },
+
+            // Xử lí sự kiện
+            handleEvents:function() {
+                const _this = this
+                const cdmusicwidth = cdmusic.offsetWidth
+                //xử lý phóng ta thu nhỏ 
+                document.onscroll = function() {
+                    const scrolltop = window.scrollY
+                    const newcdwidth = cdmusicwidth - scrolltop
+                    
+                    // cdmusic.style.width = newcdwidth > 0 ? newcdwidth + 'px' : 0
+                    if(newcdwidth > 0) {
+                        cdmusic.style.width = newcdwidth + 'px'
+                    } else {
+                        cdmusic.style.width = newcdwidth + '0px'
+                    }
+
+                    cdmusic.style.opacity = newcdwidth / cdmusicwidth //opacity làm mờ kích thước cũ
+                }
+
+                //làm cho cái đĩa cd quay
+                var animatetion = imgagecicre.animate([
+                    {transform:'rotate(360deg)'}
+                ], {
+                    duration : 10000,
+                    iterations : Infinity
+                    
+                })
+                animatetion.pause() //thuộc tính anmation để quay 360
+
+
+                //sự kiện làm cho bài hát tiến lùi
+                nexplist.onclick = function() {
+                    if(_this.isRandom) {
+                        _this.playrandommusic()
+                    } else {
+                        _this.nextplists()
+                    }
+                    musichot.play()
+                    player.classList.add('playing')
+                    animatetion.play()
+                    //chạy lại hàm render cho đổi màu class
+                    _this.render()
+                    //làm hiệu ứng cho class nhảy mà ko bị khuất xuống
+                    _this.scrollactivesongs()
+                }
+
+                prevlist.onclick = function() {
+                    if(_this.isRandom) {
+                        _this.playrandommusic()
+                    } else {
+                        _this.prevplist()
+                    }
+                    musichot.play()
+                    player.classList.add('playing')
+                    animatetion.play()
+                    _this.scrollactivesongs() 
+                }
+
+
+                //click play,pause,tua tới lui
+                toggleplay.onclick = function() {
+                    if(_this.isPlaying) {
+                        _this.isPlaying = false 
+                        musichot.pause() //dừng phát
+                        player.classList.remove('playing')
+                        //đĩa trên thẻ anmation dừng
+                        animatetion.pause()
+                    } else {
+                        _this.isPlaying = true
+                        musichot.play() //phát tiếp
+                        //tua tới lui video
+                        musichot.ontimeupdate = function() {
+                            if(musichot.duration) {
+                                const getcurrentimes = Math.floor(musichot.currentTime / musichot.duration * 100) //tính ra % giây của bài hát
+                                progress.value = getcurrentimes //lấy ra % bài hát
+                                progress.onchange = function(e) {
+                                    const seektimes = musichot.duration / 100 * e.target.value //tính ra lại số giây từ số phần trăm
+                                    musichot.currentTime = seektimes
+                                }
+                            } 
+                        }
+                        player.classList.add('playing')
+                         //đĩa trên thẻ anmation quay
+                        animatetion.play() 
+                    }
+                }
+
+                //sự kiện random ra bài hát
+                randoms.onclick = function() {
+                    _this.isRandom = !_this.isRandom
+                    randoms.classList.toggle('active',_this.isRandom) //cách viết mới thay vì dùng if
+                }
+
+                //sự kiện tự động chuyển bài
+                musichot.onended = function() { 
+                    if(_this.isrePeat) {
+                        musichot.play()
+                    } else {
+                        nexplist.click()
+                    }
+                }
+
+
+                //sự kiện lặp lại bài hát
+                repeats.onclick = function() {
+                    _this.isrePeat = !_this.isrePeat
+                    repeats.classList.toggle('active',_this.rePeats)
+                }
+
+                //sự kiện click vào playlist
+                playList.onclick = function(e) {
+                    const sixnater = e.target.closest('.music-one1:not(.active)') //ko phải là class music-one có active
+                    const globolban = e.target.closest('.mucsicfile3') // phải là class mucsicfile3 
+                    if( sixnater || globolban ) {                      //thì mới cho vào sự kiện click  ... dấu || là hoặc
+                        if(sixnater) {  //truyền thêm 1 atribute vào thẻ music-one
+                            _this.currentindex = Number(sixnater.getAttribute('data-index')) //dạng chuỗi nên đổi sang dạng số vì this.curent index dạng số
+                            _this.loadcurentsong()
+                            _this.render()
+                            musichot.play()
+                            player.classList.add('playing')
+                            animatetion.play()
+                        }
+
+                        if(globolban) {
+
+                        }
+                    }
+                }
+
+            },
+
+            //hàm làm hiệu ứng cho khi click tới class active tự động hiện lên
+            scrollactivesongs : function() {
+                const addclassactive = document.querySelector('.music-one .active')
+                setTimeout(() => {
+                    addclassactive.scrollIntoView({  //scroll into view element  "search"
+                        behavior : "smooth",
+                        block : "nearest",
+                    })
+                },300);
+            },
+
+            //hàm tạo tiến lùi
+           nextplists : function() {
+            this.currentindex ++
+            if(this.currentindex >= this.songs.length) {
+                this.currentindex = 0
+            }
+
+            this.loadcurentsong() //load bài mới xong chạy lại vào phương thức này
+           },
+
+           prevplist: function() {
+            this.currentindex --
+            if(this.currentindex < 0) {
+                this.currentindex = this.songs.length - 1
+            }
+            this.loadcurentsong() //load bài mới xong chạy lại vào phương thức này
+           },
+
+           //hàm tạo random
+           playrandommusic: function() {
+                let newIndex
+                do {
+                    newIndex = Math.floor(Math.random() * this.songs.length)
+                } while (newIndex === this.currentindex)
+                this.currentindex = newIndex
+                this.loadcurentsong()
+            },
+
+            start : function() {
+                //hàm tạo ra một objet mới cho object cũ
+                this.defineProperties()
+
+
+                //lắng nge và xử lý các điều kiện
+                this.handleEvents()
+                this.loadcurentsong()
+
+                //render lại danh sách bài hát
+                this.render()
+            }
+        }
+
+        app.start()
+
+    </script>
+</body>
+
+</html>

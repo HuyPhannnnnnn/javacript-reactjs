@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+    <div class="todo">
+        <div class="todo-one">
+            <h2>Nhập số</h2>
+            <input type="text" id="getValue">
+            <button id="btnValue">Nhập</button>
+            <button id="deleteNumber">Xóa</button>
+            <button id="MaxNumber">Số lớn nhất</button>
+            <button id="MinNumber">Số nhỏ nhất</button>
+            <button id="evenNumber">Số chẵn</button>
+            <button id="oddNumber">Số lẽ</button>
+        </div>
+        <div class="todo-two">
+            <h1 id="resultNumber"></h1>
+        </div>
+        <div class="todo-tree">
+            <h1 id="resultNumber1"></h1>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function () {
+            var xArray = []
+            $("#btnValue").click(function () {
+                var x = $("#getValue").val();
+                xArray.push(Number(x))
+                $("#resultNumber").text(xArray)
+            })
+
+            $("#deleteNumber").click(function () {
+                xArray = []
+                $("#resultNumber").html(xArray);
+            })
+
+            $("#MaxNumber").click(function () {
+                var max = xArray[0]
+                for (i = 0; i < xArray.length; i = i + 1) {
+                    if (xArray[i] > max) {
+                        max = xArray[i]
+                        console.log(max)
+                    }
+                }
+                $("#resultNumber1").html("Số lờn nhất là : " + max);
+
+            })
+
+            $("#MinNumber").click(function () {
+                var min = xArray[0]
+                for (i = 0; i < xArray.length; i = i + 1) {
+                    if (xArray[i] < min) {
+                        min = xArray[i]
+                        console.log(min)
+                    }
+                }
+                $("#resultNumber1").html("Số nhỏ nhất là : " + min);
+            })
+
+            $("#evenNumber").click(function () {
+                var even = []
+                for (i = 0; i < xArray.length; i = i + 1) {
+                    if (xArray[i] % 2 == 0) {
+                        even.push(xArray[i]);
+                    }
+                }
+                $("#resultNumber1").text("Số chắn là : " + even)
+            })
+
+            $("#oddNumber").click(function () {
+                var odd = []
+                for (i = 0; i < xArray.length; i = i + 1) {
+                    if (xArray[i] % 2 == 1) {
+                        odd.push(xArray[i]);
+                        console.log(odd)
+                    }
+                }
+                $("#resultNumber1").text("Số lẽ là : " + odd)
+            })
+
+            
+
+
+
+
+
+
+        })
+
+
+
+
+
+    </script>
+</body>
+
+</html>
+
+
+
+
+<!-- php database
+
+1)Thêm cột:
+
+
+ALTER TABLE ten_bang
+ADD ten_cot dinh_nghia_cot;
+
+
+2)Xóa mối quan hệ:
+
+SELECT 
+  TABLE_NAME,COLUMN_NAME,CONSTRAINT_NAME, REFERENCED_TABLE_NAME,REFERENCED_COLUMN_NAME
+FROM
+  INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE
+  REFERENCED_TABLE_SCHEMA = '<database>' AND
+  REFERENCED_TABLE_NAME = '<table>';
+
+
+
+3)Nhập Nguyên bảng:
+
+INSERT INTO MyTable
+  ( Column1, Column2, Column3 )
+VALUES
+  ('John', 123, 'Lloyds Office'), 
+  ('Jane', 124, 'Lloyds Office'), 
+  ('Billy', 125, 'London Office'),
+  ('Miranda', 126, 'Bristol Office');
+    
+
+4)Xóa cột:
+
+ALTER TABLE table_name
+DROP column_name;
+
+
+
+5)
+SELECT student.NAME, register.id_student, register.id_class, class.NGANH
+FROM student
+INNER JOIN register ON student.ID=register.id_student
+INNER JOIN class ON register.id_class = class.ID
+WHERE NGANH = 'CNTT'
+
+
+
+
+6)javacript:
+    1.alert
+    2. -->

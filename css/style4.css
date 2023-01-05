@@ -1,0 +1,225 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+    background: #8080802b
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+img {
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+
+    .music {
+        padding: 16px 16px 14px 16px;
+        background-color: white;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        max-width: 360px;
+        border-bottom: 1px solid #ebebee;
+        z-index: 999;
+    }
+    .header{
+        text-align: center;
+    }
+
+    .header h4 {
+        font-size: 16px;
+        font-weight: 800;
+        color: red;
+        margin-bottom: 8px;
+    }
+
+    .header h1 {
+        font-size: 30px;
+        font-weight: 800;
+        margin-bottom: 10px;
+        color: #000000ad;
+    }
+
+   .cicre {
+        display: flex;
+        margin: auto;
+        width: 350px;
+    }
+
+    .cicre div {
+        padding: 5px 40px 15px 40px;
+        margin-bottom: 10px;
+        margin: auto;
+    }
+
+    .cicre div img {
+        width: 100%;
+        border-radius: 60%;
+    }
+
+    .icon-music {
+        display: flex;
+        width: 100%;
+        align-content: center;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .icon-music div {
+        font-size: 27px;
+        font-weight: 600;
+        color: gray
+    }
+
+    .icon-music div:nth-child(3) {
+        font-size: 50px;
+        color: red;
+    }
+
+    .music input {
+        width: 100%
+    }
+
+    .music-one{
+        margin-top: 445px;
+        padding: 12px;
+    }
+
+    .music-one1 {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background: white;
+        
+    }
+
+    .music-one1.active {
+        background: #ffc0cbad;
+        color: red;
+    }
+
+    .music-one1.active .mucsicfile3 {
+        color: black;
+    }
+
+    .music-one1:active {
+        opacity: 0.8;
+    }
+        
+
+    .mucsicfile1 {
+        width: calc(20% - 10px);
+        position: relative;
+        left: 16px;
+    }
+
+    .mucsicfile1 img {
+        width: 100%;
+        border-radius: 65%;
+        height: 42px;
+    }
+
+    .mucsicfile2 {
+        width: calc(80% - 10px);
+        text-align: center;
+        line-height: 25px;
+    }
+
+    .mucsicfile2 h3 {
+        font-size: 20px;
+        font-weight: 900;
+    }
+
+    .mucsicfile2 p {
+        font-size: 17px;
+        font-weight: 700;
+        color: gray;
+    }
+    .mucsicfile3 {
+        width: calc(20% - 10px);
+        font-size: 30px;
+    }
+
+
+    .music .fa-circle-pause {
+        display: none;
+    }
+
+    .music.playing .fa-circle-pause {
+        display: inline-block;
+    }
+
+    .music.playing .fa-circle-play {
+        display: none;
+    }
+
+
+    .btn-random.active .fa-shuffle {
+        color: red;
+    }
+
+    .btn-repeat.active .fa-repeat {
+        color: red;
+    }
+
+    
+
+    
+
+
+
+
+   
+
+    
+    
+    
+
+}

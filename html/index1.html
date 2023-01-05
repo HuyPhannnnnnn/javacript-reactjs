@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/style1.css">
+</head>
+
+<body>
+    <div class="header2">
+        <div class="header2-one container">
+            <div class="todo-one">
+                <div class="todo-one1">
+                    <div><img src="../image/laptop.svg" alt=""></div>
+                    <h1>My to do list</h1>
+                </div>
+                <h2>~ Today I need to ~</h2>
+                <div class="todo-one2">
+                    <input type="text" id="getValue" placeholder="Nhập nội dung ...">
+                    <button id="btnValue"><span>Nhập</span></button>
+                </div>
+            </div>
+            <div class="todo-two">
+                <ul id="result" class="toDoList">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btnValue").click(function () {
+                var input = $("#getValue").val()
+                var span = $('<span> </span>')
+                $(span).append(input)
+                var deletee = $('<button><i class="fa-solid fa-trash-can"></i></button>')
+                var edit = $('<button>Chỉnh sửa</button>')
+                // $('ul').append('<li>' + xAray + '<button id="delete">Xóa</button>' + '</li>');
+                var li = $('<li> </li>')
+                $(li).append(span).append(deletee).append(edit)
+                $('#result').append(li)
+                $(deletee).on('click', function () {
+                    $(this).parent('li')[0].remove()
+
+                })
+
+
+                $(edit).on('click', function () {
+                    var newinput = $('<input type = "text">')
+                    var newbutton = $('<button>Lưu</button>')
+                    var thisli = $(this).closest('li')
+                    $(thisli).append(newinput).append(newbutton)
+
+                    //+++ đưa value vào newinput:
+                    var pa = $(this).parent(li)[0]
+                    // Gọi ra span
+                    var elementa = pa.getElementsByTagName('span')[0]
+                    // lấy text trong spann ra       
+                    elementa = $(elementa).text()
+                    // đưa vào newinput
+                    $(newinput).val(elementa)
+                    // ẩn edit
+                    $(edit).hide()
+
+
+                    // $(newinput).attr("id", "new")
+                    $(newbutton).on('click', function () {
+                        var saveli = $(newinput).val()
+                        var getvalua = $(this).parent(li)[0]
+                        var p = getvalua.getElementsByTagName('span')[0]
+                        $(p).html(saveli)
+                        $(newinput).remove()
+                        $(newbutton).remove()
+                        $(edit).show()
+
+                    })
+
+                })
+
+
+            });
+
+
+        });
+
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>
